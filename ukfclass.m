@@ -37,6 +37,8 @@ classdef ukfclass < handle
                     
                 end
                 k = 2;
+                obj.a=(1e5);
+                
                 obj.gam = gIn;
                 obj.y = 0;
                 obj.rho=2;
@@ -47,9 +49,10 @@ classdef ukfclass < handle
                 obj.var_w=0;
                 
                 obj.R=obj.var_nu;
-                obj.a=1e5;
+                
                 obj.M=1e5;
                 obj.x=[3e5 -2e4 0.001]';
+%                 obj.x=[2e5 -1e4 0.001]';
                 obj.n=length(obj.x);
                 obj.Q=zeros(obj.n);
                 obj.x_post=obj.x;
@@ -112,6 +115,8 @@ classdef ukfclass < handle
                 %%
             %    Measurement update
                 obj.y(k)=take_measurement(obj.x(1,k),obj.a,obj.M,obj.R);
+                disp(k)
+                
                 x_sigma_prior=generatesigmapoints2(x_prior,P_prior);
                 y_avg=0;
                 for m=1:2*obj.n
