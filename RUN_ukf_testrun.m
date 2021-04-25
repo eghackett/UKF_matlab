@@ -5,7 +5,7 @@ clc;clear;close all;
 
 k = 3;
 
-objarray(1, 100) = ukfclass(20000);
+objarray(1, 1) = ukfclass(10000);
 
 for j = 1:length(objarray)
     for k=3:60

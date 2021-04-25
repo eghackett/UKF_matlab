@@ -6,13 +6,14 @@ classdef ukfclass < handle
         
         x_sigma
         x_next
-        y
+        y=0;
         
-        rho
-        g
-        T
-        var_nu
-        var_w
+        rho=2;
+        g=32.2;
+%         gam; %=20000;
+        T=0.5;
+        var_nu=1e4;
+        var_w=0;
         R
         a
         M
@@ -27,24 +28,17 @@ classdef ukfclass < handle
     end
     
     methods
-        function obj = ukfclass(gIn)
+        function obj = ukfclass(gamma)
             %UNTITLED11 Construct an instance of this class
             %   Detailed explanation goes here
-                if nargin == 0
-                    gIn=20000;
-                    
-%                 else
-                    
-                end
                 k = 2;
-                obj.gam = gIn;
-                obj.y = 0;
-                obj.rho=2;
-                obj.g=32.2;
                 
-                obj.T=0.5;
-                obj.var_nu=1e4;
-                obj.var_w=0;
+                rho=2;
+                g=32.2;
+                gam; %=20000;
+                T=0.5;
+                var_nu=1e4;
+                var_w=0;
                 
                 obj.R=obj.var_nu;
                 obj.a=1e5;
@@ -54,7 +48,7 @@ classdef ukfclass < handle
                 obj.Q=zeros(obj.n);
                 obj.x_post=obj.x;
                 obj.P_post=diag([1e6  4e6 10]);
-                
+                obj.gam=gamma; %20000; %gamInput;
                 
                 updatefilter(obj,k)
                 
